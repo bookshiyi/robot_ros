@@ -1,0 +1,220 @@
+<?xml version="1.0"?>  
+<robot name="robot_model">
+  <link name="base_link">  
+    <visual>  
+      <geometry>  
+        <box size=".42 .31 .21"/>  
+		</geometry>  
+    <origin rpy="0 0 0" xyz="-0.15 0 0.22"/>  
+    <material name="transparent">  
+        <color rgba="1 1 1 0.5"/>  
+    </material>  
+    </visual>  
+  </link> 
+
+  <link name="left_front_wheel_link">  
+    <visual>  
+      <geometry>  
+        <cylinder length=".025" radius="0.075"/>  
+      </geometry>  
+      <material name="blue">  
+        <color rgba="0 0 .8 1"/>  
+      </material>  
+    </visual>  
+  </link>  
+  <link name="right_front_wheel_link">  
+    <visual>  
+      <geometry>  
+        <cylinder length=".025" radius="0.075"/>  
+      </geometry>  
+      <material name="blue">  
+        <color rgba="0 0 .8 1"/>  
+      </material>  
+    </visual>  
+  </link>  
+  <link name="left_back_wheel_link">  
+    <visual>  
+      <geometry>  
+        <cylinder length=".03" radius="0.05"/>  
+      </geometry>  
+      <material name="black">  
+        <color rgba="0 0 0 1"/>  
+      </material>  
+    </visual>  
+  </link>  
+  <link name="right_back_wheel_link">  
+    <visual>  
+      <geometry>  
+        <cylinder length=".03" radius="0.05"/>  
+      </geometry>  
+      <material name="black">  
+        <color rgba="0 0 0 1"/>  
+      </material>  
+    </visual>  
+  </link>
+  <link name="camera_link">  
+    <visual>  
+      <geometry>  
+        <box size=".06 .28 .04"/>  
+      </geometry>  
+      <material name="black">  
+          <color rgba="0 0 0 1"/>  
+      </material>  
+    </visual>  
+  </link> 
+  <link name="screen_frame_link">  
+    <visual>  
+      <geometry>  
+        <box size=".17 .25 .015"/>  
+      </geometry>  
+      <material name="black">  
+          <color rgba="0 0 0 1"/>  
+      </material>  
+    </visual>  
+  </link> 
+  <link name="screen_link">  
+    <visual>  
+      <geometry>  
+        <box size=".135 .215 .001"/>  
+      </geometry>  
+      <material name="white">  
+          <color rgba="1 1 1 1"/>  
+      </material>  
+    </visual>  
+  </link>    
+  <link name="imu_link">  
+    <visual>  
+      <geometry>  
+        <box size=".06 .10 .02"/>  
+      </geometry>  
+      <material name="green">  
+          <color rgba="0 1 0 1"/>  
+      </material>  
+    </visual>  
+  </link> 
+  <!--<link name="swtich_link">  
+    <visual>  
+      <geometry>  
+        <box size=".03 .025 .01"/>  
+      </geometry>  
+      <material name="red">  
+          <color rgba="1 0 0 1"/>  
+      </material>  
+    </visual>  
+  </link> 
+  <link name="charge_link">  
+    <visual>  
+      <geometry>  
+        <box size=".03 .03 .01"/>  
+      </geometry>  
+      <material name="black">  
+          <color rgba="0 0 0 1"/>  
+      </material>  
+    </visual>  
+  </link> 
+  <link name="left_ultrasonic_link">  
+    <visual>  
+      <geometry>  
+        <box size=".015 .02 .05"/>  
+      </geometry>  
+      <material name="white">  
+      </material>  
+    </visual>  
+  </link> 
+  <link name="front_ultrasonic_link">  
+    <visual>  
+      <geometry>  
+        <box size=".015 .05 .02"/>  
+      </geometry>  
+      <material name="white">  
+      </material>  
+    </visual>  
+  </link> 
+  <link name="right_ultrasonic_link">  
+    <visual>  
+      <geometry>  
+        <box size=".015 .02 .05"/>  
+      </geometry>  
+      <material name="white">   
+      </material>  
+    </visual>  
+  </link> -->
+
+  <joint name="left_front_wheel_joint" type="fixed">  
+    <axis xyz="0 0 1"/>  
+    <parent link="base_link"/>  
+    <child link="left_front_wheel_link"/>  
+    <origin rpy="1.57075 0 0" xyz="0 0.185 0.075"/>  
+    <limit effort="100" velocity="100"/>  
+    <joint_properties damping="0.0" friction="0.0"/>  
+  </joint>  
+  <joint name="right_front_wheel_joint" type="fixed">  
+    <axis xyz="0 0 1"/>  
+    <parent link="base_link"/>  
+    <child link="right_front_wheel_link"/>  
+    <origin rpy="1.57075 0 0" xyz="0 -0.185 0.075"/>  
+    <limit effort="100" velocity="100"/>  
+    <joint_properties damping="0.0" friction="0.0"/>  
+  </joint>  
+  <joint name="left_back_wheel_joint" type="fixed">  
+    <axis xyz="0 0 1"/>  
+    <parent link="base_link"/>  
+    <child link="left_back_wheel_link"/>  
+    <origin rpy="1.57075 0 0" xyz="-0.34 0.11 0.05"/>  
+    <limit effort="100" velocity="100"/>  
+    <joint_properties damping="0.0" friction="0.0"/>  
+  </joint>  
+  <joint name="right_back_wheel_joint" type="fixed">  
+    <axis xyz="0 0 1"/>  
+    <parent link="base_link"/>  
+    <child link="right_back_wheel_link"/>  
+    <origin rpy="1.57075 0 0" xyz="-0.34 -0.11 0.05"/>  
+    <limit effort="100" velocity="100"/>  
+    <joint_properties damping="0.0" friction="0.0"/>  
+  </joint>  
+  <joint name="camera_joint" type="fixed">  
+    <parent link="base_link"/>  
+    <child link="camera_link"/>  
+    <origin rpy="0 0 0" xyz="0.03 0 0.34"/>  
+  </joint>
+  <joint name="screen_frame_joint" type="fixed">  
+    <parent link="base_link"/>  
+    <child  link="screen_frame_link"/>  
+    <origin rpy="0 -0.785375 0" xyz="-0.17 0 0.42"/>  
+  </joint> 
+  <joint name="screen_joint" type="fixed">  
+    <parent link="base_link"/>  
+    <child  link="screen_link"/>  
+    <origin rpy="0 -0.785375 0" xyz="-0.17 0 0.43"/>  
+  </joint>  
+  <joint name="imu_joint" type="fixed">  
+    <parent link="base_link"/>  
+    <child  link="imu_link"/>  
+    <origin rpy="0 0 -1.57075" xyz="-0.17 -0.10 0.15"/>  
+  </joint> 
+  <!--<joint name="swtich_joint" type="fixed">  
+    <parent link="base_link"/>  
+    <child  link="swtich_link"/>  
+    <origin rpy="0 0 0" xyz="-0.34 -0.05 0.33"/>  
+  </joint> 
+  <joint name="charge_joint" type="fixed">  
+    <parent link="base_link"/>  
+    <child  link="charge_link"/>  
+    <origin rpy="0 0 0" xyz="-0.34 0.05 0.33"/>  
+  </joint> 
+  <joint name="left_ultrasonic_joint" type="fixed">  
+    <parent link="base_link"/>  
+    <child  link="left_ultrasonic_link"/>  
+    <origin rpy="0 0 0.26179" xyz="0.05 0.13 0.15"/>  
+  </joint> 
+  <joint name="front_ultrasonic_joint" type="fixed">  
+    <parent link="base_link"/>  
+    <child  link="front_ultrasonic_link"/>  
+    <origin rpy="0 0 0" xyz="0.05 0 0.15"/>  
+  </joint> 
+  <joint name="right_ultrasonic_joint" type="fixed">  
+    <parent link="base_link"/>  
+    <child  link="right_ultrasonic_link"/>  
+    <origin rpy="0 0 -0.26179" xyz="0.05 -0.13 0.15"/>  
+  </joint> -->
+</robot>  

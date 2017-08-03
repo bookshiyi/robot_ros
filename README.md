@@ -1,2 +1,2 @@
-# robot_stm32
-基于STM32的智能机器人底盘控制器软件工程，使用IAR作为开发环境。
+# robot_ROS
+基于ROS（Kinetic版本）和Kinect V1的SLAM智能机器人代码

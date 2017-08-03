@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<launch>
+	<arg name="map" default="default_map"/>
+	<arg name="data" default="pointcloud"/>
+	
+	<arg name="teleop_keyboard_enable" default="false"/>
+	<group if="$(arg teleop_keyboard_enable)">
+		<node name="teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"/>
+	</group>
+	
+	<include file="$(find robot_launch)/launch/robot_pose_ekf.launch"/>
+	<!--<include file="$(find robot_launch)/launch/robot_localization.launch"/>-->
+	<include file="$(find robot_launch)/launch/$(arg data)_to_laserscan.launch"/><!--point-->
+	<include file="$(find robot_launch)/launch/rviz.launch">
+			<arg name="rviz" value="gmapping"/>
+	</include>
+	<include file="$(find robot_launch)/launch/move_base.launch"/>
+	<include file="$(find robot_launch)/launch/slam_gmapping.launch"/>	
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find robot_nav)/maps/$(arg map).yaml"/>  
+	<node name="base_controller" pkg="base_controller" type="base_controller" required="true" output="screen"/>
+	<node name="odom_publish" pkg="odom_publish" type="odom_publish_node" />
+
+</launch>	
+<!--<arg name="gmapping_or_amcl" default="true"/>
+	<group if="$(arg gmapping_or_amcl)">
+		<include file="$(find robot_launch)/launch/slam_gmapping.launch"/>	
+	</group>
+	<group unless="$(arg gmapping_or_amcl)">
+		<include file="$(find robot_launch)/launch/amcl.launch"/>
+	</group>-->

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<launch>
+	<!--		freenect		-->
+	<!--<include file="$(find rgbd_launch)/launch/kinect_frames.launch"/>-->
+	<include file="$(find freenect_launch)/launch/freenect.launch">
+    <arg name="rgb_processing"                  value="true" />
+    <arg name="ir_processing"                   value="false" />
+    <arg name="depth_processing"                value="true" />
+    <arg name="depth_registered_processing"     value="false" />
+    <arg name="disparity_processing"            value="false" />
+    <arg name="disparity_registered_processing" value="false" />
+    </include>
+	
+	<!--		rviz		-->
+	<!--<include file="$(find robot_launch)/launch/debug_gui.launch"/>-->
+	
+	<!--		depthimage_to_laserscan		-->
+	<node name="depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" output="screen" args="standalone depthimage_to_lasersacn/DepthImageToLaserScanNodelet">
+
+	<remap from="image" to="/camera/depth/image_raw"/>
+	<remap from="camera_info" to="/camera/depth/camera_info"/>
+	<remap from="scan" to="/scan"/>
+	</node>
+</launch>

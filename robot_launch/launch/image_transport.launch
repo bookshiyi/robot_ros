@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+	<node name="republish" type="republish" pkg="image_transport" output="screen" args="compressed in:=/camera/depth/image_raw raw out:=/android/camera_view" />
+
+</launch>

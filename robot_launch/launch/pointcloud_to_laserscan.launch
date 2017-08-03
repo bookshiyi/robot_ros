@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<launch>
+	<!--		freenect		-->
+	<!--<include file="$(find rgbd_launch)/launch/kinect_frames.launch"/>-->
+    <include file="$(find freenect_launch)/launch/freenect.launch">
+    <arg name="rgb_processing"                  value="true" />
+    <arg name="ir_processing"                   value="false" />
+    <arg name="depth_processing"                value="true" />
+    <arg name="depth_registered_processing"     value="false" />
+    <arg name="disparity_processing"            value="false" />
+    <arg name="disparity_registered_processing" value="false" />
+    </include>
+	
+	<!--		rviz		-->
+	<!--<include file="$(find robot_launch)/launch/debug_gui.launch"/>-->
+	
+    <!-- run pointcloud_to_laserscan node -->
+    <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
+
+        <remap from="cloud_in" to="/camera/depth/points"/>
+        <remap from="scan" to="/scan"/>
+        <rosparam>
+            target_frame: camera_link # Leave disabled to output scan in pointcloud frame
+            transform_tolerance: 0.03
+            min_height: 0.0
+            max_height: 1.0
+
+            angle_min: -1.5708 # -M_PI/2
+            angle_max: 1.5708 # M_PI/2
+            angle_increment: 0.00435 # M_PI/360.0
+            scan_time: 0.3333
+            range_min: 0.45
+            range_max: 4.0
+            use_inf: true
+
+            # Concurrency level, affects number of pointclouds queued for processing and number of threads used
+            # 0 : Detect number of cores
+            # 1 : Single threaded
+            # 2->inf : Parallelism level
+            concurrency_level: 1
+        </rosparam>
+	</node>
+</launch>
